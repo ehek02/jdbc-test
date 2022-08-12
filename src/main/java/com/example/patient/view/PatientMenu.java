@@ -16,11 +16,13 @@ public class PatientMenu {
             int menu = sc.nextInt();
             switch (menu) {
                 case 1:
-                    create();
+                    createPatient();
                     break;
                 case 2:
+                    confirmReserve();
                     break;
                 case 3:
+                    cancelReserve();
                     break;
                 case 0:
                     System.out.println("프로그램 종료");
@@ -32,7 +34,25 @@ public class PatientMenu {
         }
     }
 
-    private void create() {
+    private void cancelReserve() {
+        System.out.println("===== 예약 취소 =====");
+        System.out.print("예약자 주민번호 입력 : ");
+        String resNo = sc.next();
+
+        pc.cancelReservation(resNo);
+    }
+
+    private void confirmReserve() {
+        System.out.println("===== 예약 정보 확인 =====");
+        System.out.print("예약자 주민번호 입력 : ");
+        String resNo = sc.next();
+
+        pc.confirmReservation(resNo);
+
+        System.out.println("예약이 취소되었습니다.");
+    }
+
+    private void createPatient() {
         System.out.println("===== 환자 정보 등록 =====");
         System.out.print("이름 입력 : ");
         String name = sc.next();
