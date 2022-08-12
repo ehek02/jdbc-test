@@ -1,10 +1,12 @@
-package com.example.controller;
+package com.example;
+
+import com.example.patient.view.PatientMenu;
 
 import java.util.Scanner;
 
-public class IndexController {
+public class IndexMenu {
     private final Scanner sc = new Scanner(System.in);
-    private final PatientController pc = new PatientController();
+    private final PatientMenu pc = new PatientMenu();
 
     public void mainMenu() {
         while (true) {
@@ -21,9 +23,9 @@ public class IndexController {
                 case 4:
                     break;
                 case 5:
+                    pc.main();
                     break;
                 case 6:
-                    pc.main();
                     break;
                 case 0:
                     System.out.println("프로그램 종료");

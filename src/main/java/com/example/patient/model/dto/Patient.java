@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.patient.model.dto;
 
 public class Patient {
     private final Long patientId;

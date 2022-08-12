@@ -1,18 +1,11 @@
-import com.example.domain.Patient;
-import com.example.repository.PatientRepository;
-import com.example.repository.impl.PatientRepositoryImpl;
+import com.example.IndexMenu;
+import com.example.patient.model.dao.PatientDao;
 
 import java.sql.*;
-import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-        PatientRepository patientRepository = new PatientRepositoryImpl();
-
-        List<Patient> patientList = patientRepository.findAll();
-
-        for (Patient patient : patientList) {
-            System.out.println(patient.toString());
-        }
+    public static void main(String[] args) throws SQLException {
+        IndexMenu menu = new IndexMenu();
+        menu.mainMenu();
     }
 }

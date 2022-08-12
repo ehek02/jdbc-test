@@ -1,13 +1,13 @@
-package com.example.controller;
+package com.example.patient.view;
 
-import com.example.repository.PatientRepository;
-import com.example.repository.impl.PatientRepositoryImpl;
+import com.example.patient.controller.PatientController;
+import com.example.patient.model.dto.Patient;
 
 import java.util.Scanner;
 
-public class PatientController {
+public class PatientMenu {
     private final Scanner sc = new Scanner(System.in);
-    private final PatientRepository patientRepository = new PatientRepositoryImpl();
+    private final PatientController pc = new PatientController();
 
     public void main() {
         while (true) {
@@ -16,13 +16,11 @@ public class PatientController {
             int menu = sc.nextInt();
             switch (menu) {
                 case 1:
-                    createPatient();
+                    create();
                     break;
                 case 2:
-                    confirmReservation();
                     break;
                 case 3:
-                    cancelReservation();
                     break;
                 case 0:
                     System.out.println("프로그램 종료");
@@ -34,15 +32,21 @@ public class PatientController {
         }
     }
 
-    private void createPatient() {
+    private void create() {
+        System.out.println("===== 환자 정보 등록 =====");
+        System.out.print("이름 입력 : ");
+        String name = sc.next();
+        System.out.print("주민번호 입력 : ");
+        String resNo = sc.next();
+        System.out.print("연락처 입력 : ");
+        String phone = sc.next();
 
-    }
+        Patient patient = new Patient(null, resNo, name, phone);
 
-    private void confirmReservation() {
+        int result = pc.createPatient(patient);
 
-    }
-
-    private void cancelReservation() {
-
+        if (result == 0) {
+            System.out.println("환자정보 등록이 완료되었습니다.");
+        }
     }
 }
