@@ -40,8 +40,6 @@ public class PatientMenu {
         String resNo = sc.next();
 
         pc.confirmReservation(resNo);
-
-        System.out.println("예약이 취소되었습니다.");
     }
 
     private void confirmReserve() {

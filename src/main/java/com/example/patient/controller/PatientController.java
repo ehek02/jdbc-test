@@ -24,6 +24,8 @@ public class PatientController {
         System.out.println(patient.getPatientName() + "님 예약정보 입니다.");
 
         // TODO : 예약 테이블에서 환자번호로 컬럼 조회
+
+        System.out.println("예약이 취소되었습니다.");
     }
 
     public void cancelReservation(String resNo) {
