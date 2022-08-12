@@ -76,7 +76,8 @@ public class PatientMenu {
 
         Patient patient = new Patient(null, resNo, name, phone);
 
-        int result = pc.registerPatient(patient); // request
+        // request
+        int result = pc.registerPatient(patient);
 
         // response
         if (result == 0) {

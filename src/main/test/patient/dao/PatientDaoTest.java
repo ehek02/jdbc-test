@@ -9,7 +9,7 @@ import java.util.List;
 public class PatientDaoTest {
     PatientDao repository = new PatientDao();
 
-    // Connection test
+    // 연결 시험
     public Connection connectTest() throws SQLException {
         String url = "jdbc:oracle:thin:@localhost:1521:XE";
         String username = "ehek01";
@@ -25,7 +25,7 @@ public class PatientDaoTest {
         return connection;
     }
 
-    // 환자 테이블 조회
+    // 환자 정보 조회
     public void findAllTest() {
         List<Patient> patientList = repository.findAll();
 
@@ -36,7 +36,7 @@ public class PatientDaoTest {
 
     // 주민번호로 환자조회
     public void findByPatientNo() {
-        String resNo = "11111-1111111";
+        String resNo = "11111-1111111"; // 우리가 입력할 주민번호
         Patient patient = repository.findByPatientNo(resNo);
         System.out.println("test : 환자정보 -> " + patient.toString());
     }
@@ -55,9 +55,10 @@ public class PatientDaoTest {
             pstmt.setString(3, patient.getPatientName());
             pstmt.setString(4, patient.getPhone());
 
-            pstmt.executeUpdate(); // insert
+            // insert
+            pstmt.executeUpdate();
 
-            // 추가된 환자 select
+            // insert 된 환자 select
             PreparedStatement ps = connection.prepareStatement("select * from patient where patient_no = ?");
             ps.setString(1, patient.getPatientNo());
             ResultSet rs = ps.executeQuery();
@@ -76,7 +77,7 @@ public class PatientDaoTest {
     public static void main(String[] args) throws SQLException {
         PatientDaoTest test = new PatientDaoTest();
 
-//        test.connectTest().close();
+        test.connectTest().close();
 //        test.findAllTest();
 //        test.findByPatientNo();
 //        test.registerPatient();

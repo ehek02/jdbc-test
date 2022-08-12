@@ -1,12 +1,14 @@
 package com.example;
 
+import com.example.medic.view.MedicMenu;
 import com.example.patient.view.PatientMenu;
 
 import java.util.Scanner;
 
 public class IndexMenu {
     private final Scanner sc = new Scanner(System.in);
-    private final PatientMenu pc = new PatientMenu();
+    private final PatientMenu pm = new PatientMenu();
+    private final MedicMenu mm = new MedicMenu();
 
     public void mainMenu() {
         while (true) {
@@ -15,6 +17,7 @@ public class IndexMenu {
             int menu = sc.nextInt();
             switch (menu) {
                 case 1:
+                    mm.main();
                     break;
                 case 2:
                     break;
@@ -23,7 +26,7 @@ public class IndexMenu {
                 case 4:
                     break;
                 case 5:
-                    pc.main();
+                    pm.main();
                     break;
                 case 6:
                     break;
