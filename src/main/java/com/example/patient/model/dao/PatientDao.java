@@ -19,7 +19,7 @@ public class PatientDao {
      * 총 컬럼 갯수 가져오기
      * Auto_increment 대신, 총 컬럼 갯수에 +1 해서 pk값 설정.
      */
-    private int getColumnCount() {
+    public int getColumnCount() {
         try (Statement statement = getConnection().createStatement()) {
             ResultSet rs = statement.executeQuery("select count(1) from patient");
             rs.next();
@@ -33,14 +33,18 @@ public class PatientDao {
      * 모든 환자 정보 가져오기
      */
     public List<Patient> findAll() {
-        try (Statement statement = getConnection().createStatement()) {
+        String sql = "select * from patient";
+
+        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             List<Patient> patients = new ArrayList<>();
-            ResultSet rs = statement.executeQuery("select * from patient");
+            ResultSet rs = pstmt.executeQuery("select * from patient");
+
             while (rs.next()) {
                 patients.add(
                         new Patient(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4))
                 );
             }
+
             rs.close();
             return patients;
         } catch (SQLException e) {
@@ -51,12 +55,12 @@ public class PatientDao {
     /**
      * 주민번호로 환자 조회
      */
-    public Patient findByPatientNo(Long patientNo) {
+    public Patient findByPatientNo(String patientNo) {
         Patient patient;
         String sql = "select * from patient where patient_no = ?";
 
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
-            pstmt.setLong(1, patientNo);
+            pstmt.setString(1, patientNo);
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             patient = new Patient(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4));
