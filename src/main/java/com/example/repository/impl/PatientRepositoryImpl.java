@@ -18,6 +18,7 @@ public class PatientRepositoryImpl implements PatientRepository {
                         new Patient(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4))
                 );
             }
+            rs.close();
             return patients;
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -8,4 +8,6 @@ public interface PatientRepository {
     List<Patient> findAll();
 
     Patient findById(Long id);
+
+
 }
