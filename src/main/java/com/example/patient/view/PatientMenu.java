@@ -39,7 +39,9 @@ public class PatientMenu {
         System.out.print("예약자 주민번호 입력 : ");
         String resNo = sc.next();
 
-        pc.cancelReservation(resNo);
+        pc.confirmReservation(resNo);
+
+        System.out.println("예약이 취소되었습니다.");
     }
 
     private void confirmReserve() {
@@ -47,9 +49,7 @@ public class PatientMenu {
         System.out.print("예약자 주민번호 입력 : ");
         String resNo = sc.next();
 
-        pc.confirmReservation(resNo);
-
-        System.out.println("예약이 취소되었습니다.");
+        pc.cancelReservation(resNo);
     }
 
     private void createPatient() {

@@ -56,14 +56,15 @@ public class PatientDao {
      * 주민번호로 환자 조회
      */
     public Patient findByPatientNo(String patientNo) {
-        Patient patient;
+        Patient patient = null;
         String sql = "select * from patient where patient_no = ?";
 
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setString(1, patientNo);
             ResultSet rs = pstmt.executeQuery();
-            rs.next();
-            patient = new Patient(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4));
+            if (rs.next()) {
+                patient = new Patient(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4));
+            }
             System.out.println("log : 환자 정보 조회 쿼리 실행");
         } catch (SQLException e) {
             throw new RuntimeException(e);

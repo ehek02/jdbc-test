@@ -39,7 +39,6 @@ public class PatientDaoTest {
     public void findByPatientNo() {
         String resNo = "11111-1111111";
         Patient patient = repository.findByPatientNo(resNo);
-
         System.out.println("test : 환자정보 -> " + patient.toString());
     }
 

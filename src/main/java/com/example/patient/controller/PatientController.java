@@ -15,6 +15,10 @@ public class PatientController {
 
     public void confirmReservation(String resNo) {
         Patient patient = patientDao.findByPatientNo(resNo);
+        if (patient == null) {
+            System.out.println("등록된 환자가 없습니다.");
+            return;
+        }
 
         System.out.println("==========");
         System.out.println(patient.getPatientName() + "님 예약정보 입니다.");
@@ -24,8 +28,12 @@ public class PatientController {
 
     public void cancelReservation(String resNo) {
         Patient patient = patientDao.findByPatientNo(resNo);
-        System.out.println("==========");
+        if (patient == null) {
+            System.out.println("등록된 환자가 없습니다.");
+            return;
+        }
 
+        System.out.println("==========");
         System.out.println(patient.getPatientName() + "님 예약정보 입니다.");
 
         System.out.print("삭제하시겠습니까?(y/n) : ");
