@@ -4,7 +4,6 @@ import com.example.patient.model.dao.PatientDao;
 import com.example.patient.model.dto.Patient;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PatientDaoTest {
@@ -17,7 +16,7 @@ public class PatientDaoTest {
         String password = "ehek12";
 
         Connection connection = DriverManager.getConnection(url, username, password);
-        if (connection.isClosed()) {
+        if (connection == null) {
             System.out.println("test : connect 실패");
         }
 

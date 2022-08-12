@@ -16,13 +16,13 @@ public class PatientMenu {
             int menu = sc.nextInt();
             switch (menu) {
                 case 1:
-                    createPatient();
+                    환자정보등록();
                     break;
                 case 2:
-                    confirmReserve();
+                    예약정보확인();
                     break;
                 case 3:
-                    cancelReserve();
+                    예약취소();
                     break;
                 case 0:
                     System.out.println("프로그램 종료");
@@ -34,22 +34,38 @@ public class PatientMenu {
         }
     }
 
-    private void cancelReserve() {
+    private void 예약취소() {
         System.out.println("===== 예약 취소 =====");
         System.out.print("예약자 주민번호 입력 : ");
         String resNo = sc.next();
-        pc.cancelReservation(resNo);
+
+        int result = pc.cancelReservation(resNo); // request
+
+        // response
+        if (result == 0) {
+            System.out.println("예약 취소에 실패했습니다.");
+        } else if (result == 1) {
+            System.out.println("예약이 취소되었습니다.");
+        }
     }
 
-    private void confirmReserve() {
+    private void 예약정보확인() {
         System.out.println("===== 예약 정보 확인 =====");
         System.out.print("예약자 주민번호 입력 : ");
         String resNo = sc.next();
 
-        pc.confirmReservation(resNo);
+        // TODO : 예약정보 Entity Type으로 전달 받아서, view 출력
+        pc.searchReservation(resNo); // request
+
+        // 예약정보가 정상적으로 존재 할 시,
+        // 000님 예약정보입니다.
+        // 진료과 : 이비인후과, 예약시간 4시
+
+        // 예약정보가 null일 시,
+        // 예약정보가 존재하지 않습니다.
     }
 
-    private void createPatient() {
+    private void 환자정보등록() {
         System.out.println("===== 환자 정보 등록 =====");
         System.out.print("이름 입력 : ");
         String name = sc.next();
@@ -60,10 +76,13 @@ public class PatientMenu {
 
         Patient patient = new Patient(null, resNo, name, phone);
 
-        int result = pc.createPatient(patient);
+        int result = pc.registerPatient(patient); // request
 
+        // response
         if (result == 0) {
             System.out.println("환자정보 등록이 완료되었습니다.");
+        } else if (result == 1) {
+            System.out.println("환자정보 등록에 실패했습니다.");
         }
     }
 }
