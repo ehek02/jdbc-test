@@ -59,6 +59,7 @@ public class PatientDaoTest {
 
             pstmt.executeUpdate(); // insert
 
+            // 추가된 환자 select
             PreparedStatement ps = connection.prepareStatement("select * from patient where patient_no = ?");
             ps.setString(1, patient.getPatientNo());
             ResultSet rs = ps.executeQuery();
@@ -77,9 +78,9 @@ public class PatientDaoTest {
     public static void main(String[] args) throws SQLException {
         PatientDaoTest test = new PatientDaoTest();
 
-//        test.connectTest();
+//        test.connectTest().close();
 //        test.findAllTest();
 //        test.findByPatientNo();
-        test.registerPatient();
+//        test.registerPatient();
     }
 }
