@@ -80,7 +80,7 @@ public class PatientDao {
         String sql = "INSERT INTO patient (patient_id, patient_no, patient_name, phone) VALUES (?,?,?,?)";
 
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
-            pstmt.setLong(1, (getColumnCount()+1));
+            pstmt.setLong(1, (getColumnCount() + 1));
             pstmt.setString(2, patient.getPatientNo());
             pstmt.setString(3, patient.getPatientName());
             pstmt.setString(4, patient.getPhone());
@@ -117,4 +117,18 @@ public class PatientDao {
         return reservation;
     }
 
+    public int deleteReservation(Long patientId) {
+        String sql = "DELETE FROM RESERVATION " +
+                "WHERE PATIENT_ID = ?";
+
+        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
+            pstmt.setLong(1, patientId);
+            System.out.println("log : 예약 삭제 쿼리 실행");
+            int result = pstmt.executeUpdate();
+            if (result != 0) return 0;
+            return 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

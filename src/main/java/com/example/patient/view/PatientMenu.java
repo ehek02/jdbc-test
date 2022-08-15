@@ -2,6 +2,7 @@ package com.example.patient.view;
 
 import com.example.patient.controller.PatientController;
 import com.example.patient.model.dto.Patient;
+import com.example.patient.model.dto.Reservation;
 
 import java.util.Scanner;
 
@@ -43,9 +44,9 @@ public class PatientMenu {
 
         // response
         if (result == 0) {
-            System.out.println("예약 취소에 실패했습니다.");
+            System.out.println("예약이 정상적으로 취소되었습니다.");
         } else if (result == 1) {
-            System.out.println("예약이 취소되었습니다.");
+            System.out.println("예약 취소에 실패했습니다.");
         }
     }
 
@@ -54,15 +55,20 @@ public class PatientMenu {
         System.out.print("예약자 주민번호 입력 : ");
         String resNo = sc.next();
 
-        // TODO : 예약정보 Entity Type으로 전달 받아서, view 출력
-        pc.searchReservation(resNo); // request
+        Reservation reservation = pc.searchReservation(resNo); // request
+        Patient patient = pc.searchPatient(resNo);
+        if (patient == null) {
+            System.out.println("환자 정보가 존재하지 않습니다");
+            return;
+        }
 
-        // 예약정보가 정상적으로 존재 할 시,
-        // 000님 예약정보입니다.
-        // 진료과 : 이비인후과, 예약시간 4시
+        if (reservation == null) {
+            System.out.println(patient.getPatientName() + "님 예약정보가 존재하지 않습니다.");
+            return; // 메서드 종료
+        }
 
-        // 예약정보가 null일 시,
-        // 예약정보가 존재하지 않습니다.
+        System.out.println(patient.getPatientName() + "님 예약정보입니다.");
+        System.out.println(reservation.getReservationDate() + "에 예약되어 있습니다. 감사합니다.");
     }
 
     private void 환자정보등록() {

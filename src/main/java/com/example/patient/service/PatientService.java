@@ -2,7 +2,9 @@ package com.example.patient.service;
 
 import com.example.patient.model.dao.PatientDao;
 import com.example.patient.model.dto.Patient;
+import com.example.patient.model.dto.Reservation;
 
+import java.sql.PreparedStatement;
 import java.util.Scanner;
 
 public class PatientService {
@@ -14,15 +16,14 @@ public class PatientService {
     }
 
     // 예약 확인
-    public void checkReservation(String resNo) {
+    public Reservation checkReservation(String resNo) {
         Patient patient = patientDao.findByPatientNo(resNo);
         if (patient == null) {
             System.out.println("log warning : 등록된 환자가 없습니다.");
-            return;
+            return null;
         }
 
-
-        // TODO : 예약 테이블에서 환자번호로 예약 DTO return
+        return patientDao.findReservationByPatientNo(resNo);
     }
 
     // 예약 취소
@@ -36,8 +37,13 @@ public class PatientService {
         // TODO : 예약DAO에서 주민번호로 DTO 가져온다음 null이 아니면 삭제
         System.out.print("삭제하시겠습니까?(y/n) : ");
         if (new Scanner(System.in).next().toLowerCase().charAt(0) == 'y') {
-            // TODO : 예약 테이블에서 환자번호로 컬럼 삭제
+            return patientDao.deleteReservation(patient.getPatientId());
         }
-        return 0;
+
+        return 1;
+    }
+
+    public Patient findPatientByPatientNo(String resNo) {
+        return patientDao.findByPatientNo(resNo);
     }
 }
