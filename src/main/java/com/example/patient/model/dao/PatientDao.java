@@ -1,6 +1,7 @@
 package com.example.patient.model.dao;
 
 import com.example.patient.model.dto.Patient;
+import com.example.patient.model.dto.Reservation;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -90,4 +91,30 @@ public class PatientDao {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * 예약 정보 조회
+     */
+
+    public Reservation findReservationByPatientNo(String patientNo) {
+        Reservation reservation = null;
+        String sql = "SELECT r.RESERVATION_NO , r.RESERVATION_DATE , r.PATIENT_ID " +
+                "FROM RESERVATION r " +
+                "JOIN PATIENT p\n" +
+                "ON r.PATIENT_ID  = p.PATIENT_ID " +
+                "WHERE p.PATIENT_NO = ?";
+
+        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
+            pstmt.setString(1, patientNo);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                reservation = new Reservation(rs.getLong(1), rs.getDate(2), rs.getLong(3));
+            }
+            System.out.println("log : 예약 정보 조회 쿼리 실행");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return reservation;
+    }
+
 }

@@ -2,6 +2,7 @@ package patient.dao;
 
 import com.example.patient.model.dao.PatientDao;
 import com.example.patient.model.dto.Patient;
+import com.example.patient.model.dto.Reservation;
 
 import java.sql.*;
 import java.util.List;
@@ -74,12 +75,22 @@ public class PatientDaoTest {
         }
     }
 
+    // 예약정보 가져오기
+    public void findReservationByPatientNo() {
+        String patientNo = "998888";
+        Reservation reservation = repository.findReservationByPatientNo(patientNo);
+
+        System.out.println(reservation.toString());
+    }
+
     public static void main(String[] args) throws SQLException {
         PatientDaoTest test = new PatientDaoTest();
 
-        test.connectTest().close();
+//        test.connectTest().close();
 //        test.findAllTest();
 //        test.findByPatientNo();
 //        test.registerPatient();
+
+        test.findReservationByPatientNo();
     }
 }

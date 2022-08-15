@@ -8,10 +8,12 @@ import java.util.Scanner;
 public class PatientService {
     PatientDao patientDao = new PatientDao();
 
+    // 환자 등록
     public int createPatient(Patient patient) {
         return patientDao.insert(patient);
     }
 
+    // 예약 확인
     public void checkReservation(String resNo) {
         Patient patient = patientDao.findByPatientNo(resNo);
         if (patient == null) {
@@ -19,9 +21,11 @@ public class PatientService {
             return;
         }
 
+
         // TODO : 예약 테이블에서 환자번호로 예약 DTO return
     }
 
+    // 예약 취소
     public int deleteReserve(String resNo) {
         Patient patient = patientDao.findByPatientNo(resNo);
         if (patient == null) {

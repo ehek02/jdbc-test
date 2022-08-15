@@ -80,10 +80,6 @@ public class PatientMenu {
         int result = pc.registerPatient(patient);
 
         // response
-        if (result == 0) {
-            System.out.println("환자정보 등록이 완료되었습니다.");
-        } else if (result == 1) {
-            System.out.println("환자정보 등록에 실패했습니다.");
-        }
+        System.out.println("환자정보 등록이 완료되었습니다.");
     }
 }
